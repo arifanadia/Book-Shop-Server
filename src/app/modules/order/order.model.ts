@@ -1,13 +1,12 @@
 import { model, Schema } from 'mongoose';
 import { IOrder } from './order.interface';
-import Products from '../product/product.model';
+
 
 const orderSchema = new Schema<IOrder>(
   {
     email: {
       type: String,
       required: true,
-
     },
     product: {
       type: Schema.Types.ObjectId,
@@ -29,7 +28,5 @@ const orderSchema = new Schema<IOrder>(
   },
 );
 
-
-  
 const Orders = model<IOrder>('Orders', orderSchema);
 export default Orders;

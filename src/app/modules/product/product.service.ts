@@ -11,7 +11,7 @@ const getAllBook = async (searchTerm?: string): Promise<IProduct[]> => {
 
   if (searchTerm) {
     const searchRegex = new RegExp(searchTerm, 'i');
-    console.log(searchRegex);
+
     filter = {
       $or: [
         { title: searchRegex },

@@ -4,13 +4,11 @@ import { productValidationSchema } from './product.validation';
 import config from '../../config';
 
 // create a book
-const createBook = async (req: Request, res: Response,) => {
+const createBook = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
 
     const result = await productService.createBook(payload);
-    console.log(result);
-
     res.json({
       message: 'Book created successfully',
       success: true,
@@ -22,9 +20,9 @@ const createBook = async (req: Request, res: Response,) => {
       success: false,
       error,
       stack:
-      config.node_env === 'development'
-        ? new Error("Something went wrong").stack 
-        : undefined,
+        config.node_env === 'development'
+          ? new Error('Something went wrong').stack
+          : undefined,
     });
   }
 };
@@ -82,9 +80,9 @@ const getSingleBook = async (req: Request, res: Response) => {
       success: false,
       error,
       stack:
-      config.node_env === 'development'
-        ? new Error("Something went wrong").stack 
-        : undefined,
+        config.node_env === 'development'
+          ? new Error('Something went wrong').stack
+          : undefined,
     });
   }
 };
@@ -109,9 +107,9 @@ const updateBook = async (req: Request, res: Response) => {
       success: false,
       error,
       stack:
-      config.node_env === 'development'
-        ? new Error("Something went wrong").stack 
-        : undefined,
+        config.node_env === 'development'
+          ? new Error('Something went wrong').stack
+          : undefined,
     });
   }
 };
@@ -133,9 +131,9 @@ const deleteBook = async (req: Request, res: Response) => {
       success: false,
       error,
       stack:
-      config.node_env === 'development'
-        ? new Error("Something went wrong").stack 
-        : undefined,
+        config.node_env === 'development'
+          ? new Error('Something went wrong').stack
+          : undefined,
     });
   }
 };

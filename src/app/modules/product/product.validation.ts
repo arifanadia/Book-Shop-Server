@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { IProduct } from './product.interface';
 
 export const productValidationSchema = z.object({
   title: z.string().min(3),
