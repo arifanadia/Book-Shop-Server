@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { productService } from './product.service';
 import { productValidationSchema } from './product.validation';
+import config from '../../config';
 
 // create a book
-const createBook = async (req: Request, res: Response) => {
+const createBook = async (req: Request, res: Response,) => {
   try {
     const payload = req.body;
 
@@ -20,6 +21,10 @@ const createBook = async (req: Request, res: Response) => {
       message: 'ValidationError',
       success: false,
       error,
+      stack:
+      config.node_env === 'development'
+        ? new Error("Something went wrong").stack 
+        : undefined,
     });
   }
 };
@@ -53,21 +58,19 @@ const getAllBook = async (req: Request, res: Response) => {
   }
 };
 
-
 // get single book by id
 const getSingleBook = async (req: Request, res: Response) => {
   try {
-    
     const productId = req.params.productId;
 
     const result = await productService.getSingleBook(productId);
     if (!result) {
-         res.status(404).json({
-          message: 'Book not found',
-          success: false,
-        });
-        return;
-      }
+      res.status(404).json({
+        message: 'Book not found',
+        success: false,
+      });
+      return;
+    }
     res.status(200).json({
       message: 'Books retrieved successfully',
       success: true,
@@ -78,6 +81,10 @@ const getSingleBook = async (req: Request, res: Response) => {
       message: 'Resources Not Found',
       success: false,
       error,
+      stack:
+      config.node_env === 'development'
+        ? new Error("Something went wrong").stack 
+        : undefined,
     });
   }
 };
@@ -101,6 +108,10 @@ const updateBook = async (req: Request, res: Response) => {
       message: 'Validation Error',
       success: false,
       error,
+      stack:
+      config.node_env === 'development'
+        ? new Error("Something went wrong").stack 
+        : undefined,
     });
   }
 };
@@ -121,6 +132,10 @@ const deleteBook = async (req: Request, res: Response) => {
       message: 'Validation Error',
       success: false,
       error,
+      stack:
+      config.node_env === 'development'
+        ? new Error("Something went wrong").stack 
+        : undefined,
     });
   }
 };
