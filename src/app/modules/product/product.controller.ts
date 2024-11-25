@@ -57,7 +57,7 @@ const getAllBook = async (req: Request, res: Response) => {
 // get single book by id
 const getSingleBook = async (req: Request, res: Response) => {
   try {
-    console.log(req.params);
+    
     const productId = req.params.productId;
 
     const result = await productService.getSingleBook(productId);
