@@ -70,9 +70,27 @@ const allOrderRevenue = async (req: Request, res: Response): Promise<void> => {
   try {
     const revenue = await Orders.aggregate([
       {
+        $lookup: {
+          from: 'products',
+          localField: 'product',
+          foreignField: '_id',
+          as: 'productDetails',
+        },
+      },
+      {
+        $unwind: '$productDetails',
+      },
+      {
+        $project: {
+          totalItemPrice: {
+            $multiply: ['$productDetails.price', '$quantity'],
+          },
+        },
+      },
+      {
         $group: {
           _id: null,
-          totalRevenue: { $sum: '$totalPrice' },
+          totalRevenue: { $sum: '$totalItemPrice' },
         },
       },
     ]);

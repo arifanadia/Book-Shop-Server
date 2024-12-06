@@ -93,9 +93,8 @@ const updateBook = async (req: Request, res: Response) => {
     const productId = req.params.productId;
     const data = req.body;
 
-    const validatedData = productValidationSchema.parse(data);
 
-    const result = await productService.updateBook(productId, validatedData);
+    const result = await productService.updateBook(productId, data);
     res.status(200).json({
       message: 'Book updated successfully',
       success: true,
